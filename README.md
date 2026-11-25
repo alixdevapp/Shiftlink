@@ -155,7 +155,6 @@ guest network or client isolation), and the "MyWhoosh Link" app must be closed
 ShiftLink can run on the same device as the app: a "ShiftLink is active"
 notification keeps it alive in the background.
 
-Screenshots and icons: `flutter test test_screens --update-goldens` (in `test_screens/out`).
 
 ## Customizable buttons
 
