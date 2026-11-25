@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/captures/image_presentation_1024x500.png" alt="ShiftLink" width="720">
+  <img src="docs/captures/banner_en.png" alt="ShiftLink" width="720">
 </p>
 
 <h1 align="center">ShiftLink</h1>
@@ -29,16 +29,11 @@
 ## Screenshots
 
 <p align="center">
-  <img src="docs/captures/capture_1_ride_light.png" width="200" alt="Ride screen">
-  <img src="docs/captures/capture_2_ride_zwift.png" width="200" alt="Virtual gears for Zwift">
-  <img src="docs/captures/capture_3_onboarding_1.png" width="200" alt="Setup wizard">
-  <img src="docs/captures/capture_4_compatible.png" width="200" alt="Supported controllers">
+  <img src="docs/captures/en_ride.png" width="240" alt="Ride screen with ShiftLink virtual gears">
+  <img src="docs/captures/en_devices.png" width="240" alt="Devices: controllers and trainer">
+  <img src="docs/captures/en_settings.png" width="240" alt="Settings">
 </p>
-<p align="center">
-  <img src="docs/captures/capture_5_seances.png" width="200" alt="Workouts">
-  <img src="docs/captures/capture_6_sorties.png" width="200" alt="Rides">
-  <img src="docs/captures/capture_7_conseils.png" width="200" alt="Tips">
-</p>
+<p align="center"><i>Ride · Devices · Settings</i></p>
 
 ## How it works
 
