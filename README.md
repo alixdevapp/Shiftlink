@@ -236,56 +236,6 @@ connections screen) or, on older versions, over Link.
 - Settings > Backup and sharing: file, QR code or text to copy, no account
   needed. Paired devices stay on the phone.
 
-## What's new in 2.3
-
-- Trainers: besides FTMS, older Tacx and other Bluetooth **FE-C** trainers
-  (commands translated to ANT+ FE-C pages) and **Wi-Fi** trainers (DIRCON client,
-  `_wahoo-fitness-tnp._tcp` discovery).
-- **Cadence** (CSC) and **power** (Cycling Power) sensors: cadence drives the
-  gears, and the sensor's watts can replace the trainer's towards the app.
-- **Resistance test** (10 s easy, 10 s hard) in the trainer connection.
-- **ERG without an app** (starts at the last target or your power) and **staircase workout**.
-- Controllers: "Not mine" (device ignored forever), **sleep** 5 min after the end
-  of a ride, **gamepad vibration** on each shift.
-- **Automatic ride recording**, export to **Health Connect**, `app.shiftlink.ACTION`
-  intent for Tasker / MacroDroid (extras: action, button, gesture, device).
-- Android 8 minimum (Health Connect).
-
-## What's new in 2.7 (ideas taken from QZ / qdomyos-zwift)
-
-- **Riders**: one profile per person (first name, weight, FTP, max heart rate,
-  optional gear profile), picked with one tap at the top of the Ride screen.
-  Weight drives the virtual gears.
-- **Workouts without an app**: the trainer follows a workout in ERG (watts = % of
-  the rider's FTP). Three built-in workouts (easy ride, pyramid, 30/30) and import
-  of Zwift **.zwo** files (SteadyState, Warmup, Cooldown, Ramp, IntervalsT,
-  FreeRide, MaxEffort). The timer pauses when you stop pedalling; Intensity ±
-  buttons stay active; an app taking control stops the workout.
-- **Heart-rate zones** (60/70/80/90 % of max HR) in colour during the ride.
-- **Estimated watts** from speed and weight when the trainer sends no power (also
-  sent to the app).
-- **Displayed metrics** of your choice (watts, cadence, grade/target, heart rate,
-  speed; up to 4).
-- Apps that handle their own gears: the cassette draws **one cog per app gear**
-  (MyWhoosh 30, Zwift/Rouvy and others 24; adjustable with one tap).
-- Phone steering: zero is taken after 1.5 s even if the handlebar vibrates;
-  message if the phone has no gyroscope; the "Phone on handlebar" card no longer
-  jumps to the top of the list.
-
-## What's new in 2.10
-
-- **Map and elevation in the .fit**: a ride on a GPX route keeps its position and
-  altitude ("virtual" ride), so Strava and Intervals.icu show the map and climbing.
-- **Resume a route** where you stopped, or start from any km. The record (ghost)
-  only counts for a route ridden from the start.
-- **One lap per workout block** in the .fit (average watts, heart rate and cadence
-  for each interval).
-- **.zwo files**: requested cadence (`Cadence`, `CadenceResting`) and messages
-  (`textevent`) are shown during the workout and read aloud.
-- Trainer **calibration (spin down)**, for FTMS trainers that support it.
-- **Up to 200 routes** (one file each in the app folder, no longer in
-  preferences), and GPX files up to 4 MB are accepted. Routes are not part of the
-  settings backup.
 
 ## Security
 
