@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="../../releases/latest"><img src="https://img.shields.io/badge/Download-APK%202.22.0-2ea44f?style=for-the-badge&logo=android&logoColor=white" alt="Download the ShiftLink APK for Android"></a>
+  <a href="../../releases/latest"><img src="https://img.shields.io/badge/Download-APK%202.22.1-2ea44f?style=for-the-badge&logo=android&logoColor=white" alt="Download the ShiftLink APK for Android"></a>
   <img src="https://img.shields.io/badge/Android-8%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Requires Android 8 or later">
   <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Built with Flutter">
   <img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="GPL-3.0 open-source license">

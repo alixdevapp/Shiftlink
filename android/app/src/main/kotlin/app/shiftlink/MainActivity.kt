@@ -30,6 +30,8 @@ class MainActivity : FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "shiftlink/voice").setMethodCallHandler(Voice(this))
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "shiftlink/tile")
             .setMethodCallHandler(QuickTileChannel(this))
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "shiftlink/update")
+            .setMethodCallHandler(AppUpdater(this))
     }
 
     @Deprecated("Deprecated in Java")

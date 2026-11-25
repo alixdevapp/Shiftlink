@@ -1727,4 +1727,10 @@ const Map<String, String> nl = {
   'Monde virtuel dans Chrome ou Edge sur ordinateur, connexion OpenBikeControl en Bluetooth': 'Virtuele wereld in Chrome of Edge op de computer, OpenBikeControl-verbinding via Bluetooth',
   'Everycol a sa propre ligne dans la liste des applis (OpenBikeControl en Bluetooth).': 'Everycol heeft een eigen regel in de lijst met apps (OpenBikeControl via Bluetooth).',
   'Clavier Bluetooth : chaque touche reste appuyée 50 ms, pour les jeux sur ordinateur qui ratent les appuis trop courts.': 'Bluetooth-toetsenbord: elke toets blijft 50 ms ingedrukt, voor computergames die te korte drukken missen.',
+  'Mettre à jour': 'Bijwerken',
+  'Mise à jour vers ShiftLink {0}': 'Bijwerken naar ShiftLink {0}',
+  'Téléchargement…': 'Downloaden…',
+  'Autorise ShiftLink à installer des applis, puis touche à nouveau « Mettre à jour ».': 'Sta ShiftLink toe apps te installeren en tik daarna opnieuw op ‘Bijwerken’.',
+  'La mise à jour n’a pas pu être téléchargée. Vérifie ta connexion et réessaie.': 'De update kon niet worden gedownload. Controleer je verbinding en probeer het opnieuw.',
+  'ShiftLink se met à jour tout seul : quand une nouvelle version sort, touche « Mettre à jour » et Android l’installe en gardant tes réglages.': 'ShiftLink werkt zichzelf bij: als er een nieuwe versie is, tik je op ‘Bijwerken’ en Android installeert die met behoud van je instellingen.',
 };

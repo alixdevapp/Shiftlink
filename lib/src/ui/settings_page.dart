@@ -19,6 +19,7 @@ import 'rides_page.dart';
 import 'shifting_page.dart';
 import 'tips_page.dart';
 import 'trainer_tools.dart';
+import 'update_dialog.dart';
 import 'whats_new.dart';
 import 'widgets.dart';
 
@@ -61,7 +62,7 @@ class SettingsPage extends StatelessWidget {
         ),
         action: u == null
             ? null
-            : SnackBarAction(label: tr('Télécharger'), onPressed: () => openLink(u.url)),
+            : SnackBarAction(label: tr('Mettre à jour'), onPressed: () => runUpdate(context, u)),
       ),
     );
   }

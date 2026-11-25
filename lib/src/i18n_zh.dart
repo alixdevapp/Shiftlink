@@ -1460,4 +1460,10 @@ const Map<String, String> zh = {
   'Monde virtuel dans Chrome ou Edge sur ordinateur, connexion OpenBikeControl en Bluetooth': '在电脑的 Chrome 或 Edge 中运行的虚拟世界，通过蓝牙进行 OpenBikeControl 连接',
   'Everycol a sa propre ligne dans la liste des applis (OpenBikeControl en Bluetooth).': 'Everycol 在应用列表中有了自己的一行（通过蓝牙的 OpenBikeControl）。',
   'Clavier Bluetooth : chaque touche reste appuyée 50 ms, pour les jeux sur ordinateur qui ratent les appuis trop courts.': '蓝牙键盘：每个按键保持按下 50 毫秒，适用于会漏掉过短按键的电脑游戏。',
+  'Mettre à jour': '更新',
+  'Mise à jour vers ShiftLink {0}': '更新到 ShiftLink {0}',
+  'Téléchargement…': '正在下载…',
+  'Autorise ShiftLink à installer des applis, puis touche à nouveau « Mettre à jour ».': '请允许 ShiftLink 安装应用，然后再次点按“更新”。',
+  'La mise à jour n’a pas pu être téléchargée. Vérifie ta connexion et réessaie.': '无法下载更新。请检查网络连接后重试。',
+  'ShiftLink se met à jour tout seul : quand une nouvelle version sort, touche « Mettre à jour » et Android l’installe en gardant tes réglages.': 'ShiftLink 可自动更新：有新版本时，点按“更新”，Android 会安装并保留你的设置。',
 };

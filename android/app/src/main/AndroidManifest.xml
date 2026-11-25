@@ -16,6 +16,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Mise à jour depuis l'appli (APK des releases GitHub). -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- Health Connect : écrire les sorties (jamais lire). -->
     <uses-permission android:name="android.permission.health.WRITE_EXERCISE" />
     <uses-permission android:name="android.permission.health.WRITE_POWER" />
@@ -28,6 +30,15 @@
         android:label="ShiftLink"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.updates"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/update_paths" />
+        </provider>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -618,7 +618,7 @@ class AppState extends ChangeNotifier {
   /// Nouveautés : à montrer une fois si ShiftLink vient d'être mis à jour (pas à la première installation).
   // ------- Nouvelle version de ShiftLink --------
   /// Prévenir quand une nouvelle version sort (une requête à GitHub par jour au plus).
-  bool get checkUpdates => updateRepo.isNotEmpty && (prefs?.getBool('checkUpdates') ?? false);
+  bool get checkUpdates => updateRepo.isNotEmpty && (prefs?.getBool('checkUpdates') ?? true);
   Future<void> setCheckUpdates(bool v) async {
     await prefs?.setBool('checkUpdates', v);
     notifyListeners();

@@ -4,12 +4,12 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../app_state.dart';
 import '../i18n.dart';
-import '../net/update_check.dart';
 import 'brand.dart';
 import 'devices_page.dart';
 import 'ride_extras.dart' show WorkoutsTab;
 import 'ride_page.dart';
 import 'settings_page.dart';
+import 'update_dialog.dart';
 import 'whats_new.dart';
 
 class HomeShell extends StatefulWidget {
@@ -62,11 +62,8 @@ class _HomeShellState extends State<HomeShell> {
         duration: const Duration(seconds: 12),
         content: Text(tr('ShiftLink {0} est sortie.', [u.version])),
         action: SnackBarAction(
-          label: tr('Télécharger'),
-          onPressed: () {
-            openLink(u.url);
-            widget.app.skipUpdate();
-          },
+          label: tr('Mettre à jour'),
+          onPressed: () => runUpdate(context, u),
         ),
       ),
     );

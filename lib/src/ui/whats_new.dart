@@ -9,6 +9,7 @@ List<(String, List<(IconData, String)>)> whatsNew() => [
   (
     '2.22',
     [
+      (Icons.system_update_rounded, tr('ShiftLink se met à jour tout seul : quand une nouvelle version sort, touche « Mettre à jour » et Android l’installe en gardant tes réglages.')),
       (Icons.apps_rounded, tr('Everycol a sa propre ligne dans la liste des applis (OpenBikeControl en Bluetooth).')),
       (Icons.keyboard_rounded, tr('Clavier Bluetooth : chaque touche reste appuyée 50 ms, pour les jeux sur ordinateur qui ratent les appuis trop courts.')),
     ],

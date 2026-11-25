@@ -4,10 +4,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Dépôt GitHub où sont publiés les APK (« propriétaire/nom »). Vide : vérification masquée.
-const updateRepo = '';
+const updateRepo = 'alixdevapp/Shiftlink';
 
 class UpdateInfo {
   /// Version proposée, sans le « v » (ex. 2.13.0).
@@ -85,5 +87,73 @@ Future<bool> openLink(String url) async {
     return await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   } catch (_) {
     return false;
+  }
+}
+
+/// Vrai si [url] est un APK publié dans les releases de [repo] (seule source acceptée
+/// pour une mise à jour installée depuis l'appli).
+bool isTrustedApkUrl(String url, {String repo = updateRepo}) {
+  if (repo.isEmpty) return false;
+  final prefix = 'https://github.com/$repo/releases/download/'.toLowerCase();
+  return url.toLowerCase().startsWith(prefix) && url.toLowerCase().endsWith('.apk') && !url.contains('..');
+}
+
+/// Résultat d'une mise à jour lancée depuis l'appli.
+enum UpdateResult {
+  /// L'installeur d'Android est ouvert.
+  started,
+
+  /// Android demande d'autoriser ShiftLink à installer des applis : réglage ouvert.
+  needsPermission,
+
+  /// Pas d'APK à télécharger : la page de la release est ouverte dans le navigateur.
+  openedInBrowser,
+
+  /// Téléchargement ou installation impossible.
+  failed,
+}
+
+const _updateChannel = MethodChannel('shiftlink/update');
+
+/// Télécharge l'APK de [u] puis ouvre l'installeur d'Android. [onProgress] reçoit 0..1
+/// (ou null si la taille est inconnue). Android vérifie que l'APK est signé avec la même
+/// clé que l'appli installée avant de la remplacer.
+Future<UpdateResult> downloadAndInstall(UpdateInfo u, {void Function(double?)? onProgress}) async {
+  if (!isTrustedApkUrl(u.url)) {
+    return await openLink(u.url) ? UpdateResult.openedInBrowser : UpdateResult.failed;
+  }
+  final client = HttpClient()..connectionTimeout = const Duration(seconds: 15);
+  try {
+    final dir = Directory('${(await getTemporaryDirectory()).path}/updates');
+    if (dir.existsSync()) dir.deleteSync(recursive: true);
+    dir.createSync(recursive: true);
+    final file = File('${dir.path}/ShiftLink-${u.version.replaceAll(RegExp(r'[^0-9.]'), '')}.apk');
+    final req = await client.getUrl(Uri.parse(u.url));
+    req.headers.set('User-Agent', 'ShiftLink');
+    final resp = await req.close().timeout(const Duration(seconds: 30));
+    if (resp.statusCode != 200) return UpdateResult.failed;
+    final total = resp.contentLength;
+    var got = 0;
+    final sink = file.openWrite();
+    try {
+      await for (final chunk in resp.timeout(const Duration(seconds: 30))) {
+        sink.add(chunk);
+        got += chunk.length;
+        onProgress?.call(total > 0 ? got / total : null);
+      }
+    } finally {
+      await sink.close();
+    }
+    if (total > 0 && got != total) return UpdateResult.failed;
+    final r = await _updateChannel.invokeMethod<String>('install', {'path': file.path});
+    return switch (r) {
+      'started' => UpdateResult.started,
+      'permission' => UpdateResult.needsPermission,
+      _ => UpdateResult.failed,
+    };
+  } catch (_) {
+    return UpdateResult.failed;
+  } finally {
+    client.close();
   }
 }
