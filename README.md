@@ -246,22 +246,6 @@ connections screen) or, on older versions, over Link.
 - The Sterzo code file is verified by its SHA-256 fingerprint.
 - No account, no tracking, no cloud backup of settings, no plain-text HTTP traffic.
 
-## Building
-
-```
-flutter test
-flutter build apk --release
-```
-
-To sign with the ShiftLink key (required for updates to install over the
-previous version), add `android/key.properties`:
-
-```
-storePassword=…
-keyPassword=…
-keyAlias=shiftlink
-storeFile=/path/to/shiftlink.jks
-```
 
 ## License and sources
 
