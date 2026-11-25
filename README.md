@@ -1,24 +1,26 @@
 <p align="center">
-  <img src="docs/captures/banner_en.png" alt="ShiftLink" width="720">
+  <img src="docs/captures/shiftlink-virtual-shifting-smart-trainer-banner.png" alt="ShiftLink logo: virtual shifting for any smart trainer with a Bluetooth controller" width="720">
 </p>
 
-<h1 align="center">ShiftLink</h1>
+<h1 align="center">ShiftLink: virtual shifting for any smart trainer</h1>
 
 <p align="center">
-  <b>Shift the virtual gears of your training app with any Bluetooth controller, on any smart trainer.</b><br>
-  MyWhoosh · Rouvy · TrainingPeaks Virtual · Biketerra · Zwift · OpenBikeControl
+  <b>Free, open-source Android app that lets you shift the virtual gears of Zwift, MyWhoosh, Rouvy, TrainingPeaks Virtual and Biketerra with any Bluetooth controller, on any smart trainer.</b><br>
+  Zwift Click · Zwift Play · Zwift Ride · Shimano Di2 · SRAM AXS · Elite Sterzo · gamepads · Bluetooth remotes
 </p>
 
 <p align="center">
-  <a href="../../releases/latest"><img src="https://img.shields.io/badge/Download-APK%202.22.0-2ea44f?style=for-the-badge&logo=android&logoColor=white" alt="Download the APK"></a>
-  <img src="https://img.shields.io/badge/Android-8%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 8+">
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
-  <img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="GPL-3.0">
+  <a href="../../releases/latest"><img src="https://img.shields.io/badge/Download-APK%202.22.0-2ea44f?style=for-the-badge&logo=android&logoColor=white" alt="Download the ShiftLink APK for Android"></a>
+  <img src="https://img.shields.io/badge/Android-8%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Requires Android 8 or later">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Built with Flutter">
+  <img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="GPL-3.0 open-source license">
 </p>
 
 ---
 
-## At a glance
+**ShiftLink** turns your phone into a bridge between your **shifters** and your **indoor cycling app**. Press a button on a Zwift Click, a Di2 hood or a cheap Bluetooth remote, and ShiftLink shifts gears in MyWhoosh, Rouvy, TPV or Biketerra. For **Zwift** and trainers without virtual shifting, ShiftLink adds its own **virtual gears** to any **FTMS smart trainer** (Wahoo, Tacx, Elite, ThinkRider…). Free and open source, with no account and no tracking.
+
+## Features at a glance
 
 - **Works with your controllers**: Zwift Click / Play / Ride, Elite Sterzo and Rizer, Shimano Di2, SRAM AXS, Wahoo KICKR Bike, CYCPLUS, ThinkRider, Bluetooth remotes, gamepads, volume keys…
 - **Works with your apps**: MyWhoosh (Link), Rouvy, TPV, Biketerra and any app with keyboard shortcuts (your phone becomes a Bluetooth keyboard), OpenBikeControl over Wi-Fi.
@@ -29,9 +31,9 @@
 ## Screenshots
 
 <p align="center">
-  <img src="docs/captures/en_ride.png" width="240" alt="Ride screen with ShiftLink virtual gears">
-  <img src="docs/captures/en_devices.png" width="240" alt="Devices: controllers and trainer">
-  <img src="docs/captures/en_settings.png" width="240" alt="Settings">
+  <img src="docs/captures/shiftlink-virtual-gears-ride-screen.png" width="240" alt="ShiftLink ride screen: virtual gear 14 of 24 with watts, cadence, grade and heart rate">
+  <img src="docs/captures/shiftlink-bluetooth-controllers-devices.png" width="240" alt="ShiftLink devices screen: Bluetooth controllers and smart trainer connections">
+  <img src="docs/captures/shiftlink-settings.png" width="240" alt="ShiftLink settings screen">
 </p>
 <p align="center"><i>Ride · Devices · Settings</i></p>
 
@@ -235,6 +237,23 @@ connections screen) or, on older versions, over Link.
 - Settings > Backup and sharing: file, QR code or text to copy, no account
   needed. Paired devices stay on the phone.
 
+
+## FAQ
+
+**Can I use a Zwift Click or Zwift Play with MyWhoosh or Rouvy?**
+Yes. ShiftLink reads the Zwift Click, Play or Ride over Bluetooth and sends the shifts to MyWhoosh (Link or OpenBikeControl), Rouvy, TPV or Biketerra.
+
+**Can I get virtual shifting in Zwift on a trainer that does not support it?**
+Yes. In "ShiftLink virtual gears" mode, ShiftLink connects to your FTMS smart trainer and appears in Zwift as a Wi-Fi or Bluetooth trainer, adjusting the resistance for the selected gear.
+
+**Which smart trainers work?**
+Any Bluetooth FTMS trainer (Wahoo KICKR, Tacx, Elite, ThinkRider…), older Bluetooth FE-C trainers and Wi-Fi DIRCON trainers.
+
+**Is ShiftLink free? Is there an iPhone version?**
+ShiftLink is free and open source (GPL-3.0). It is Android only (Android 8 or later); the app it controls can run on a PC, Mac, tablet or the same phone.
+
+**Is ShiftLink an alternative to BikeControl?**
+ShiftLink covers the same need (using Bluetooth controllers with training apps) with its own code. It is an independent project, not affiliated with BikeControl / OpenBikeControl.
 
 ## Security
 
