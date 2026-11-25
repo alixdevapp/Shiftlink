@@ -1,304 +1,345 @@
-# ShiftLink
+<p align="center">
+  <img src="docs/captures/image_presentation_1024x500.png" alt="ShiftLink" width="720">
+</p>
 
-ShiftLink passe les **vitesses virtuelles** de ton appli d'entraînement avec une
-manette Bluetooth, quel que soit le home trainer.
+<h1 align="center">ShiftLink</h1>
 
-Le home trainer reste connecté directement à l'appli, qui gère la résistance et
-les vitesses virtuelles. ShiftLink lit les boutons de la manette et transmet
-« vitesse + / − » à l'appli :
+<p align="center">
+  <b>Shift the virtual gears of your training app with any Bluetooth controller, on any smart trainer.</b><br>
+  MyWhoosh · Rouvy · TrainingPeaks Virtual · Biketerra · Zwift · OpenBikeControl
+</p>
 
-| Appli | Comment |
+<p align="center">
+  <a href="../../releases/latest"><img src="https://img.shields.io/badge/Download-APK%202.22.0-2ea44f?style=for-the-badge&logo=android&logoColor=white" alt="Download the APK"></a>
+  <img src="https://img.shields.io/badge/Android-8%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 8+">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
+  <img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="GPL-3.0">
+</p>
+
+---
+
+## At a glance
+
+- **Works with your controllers**: Zwift Click / Play / Ride, Elite Sterzo and Rizer, Shimano Di2, SRAM AXS, Wahoo KICKR Bike, CYCPLUS, ThinkRider, Bluetooth remotes, gamepads, volume keys…
+- **Works with your apps**: MyWhoosh (Link), Rouvy, TPV, Biketerra and any app with keyboard shortcuts (your phone becomes a Bluetooth keyboard), OpenBikeControl over Wi-Fi.
+- **Virtual gears for Zwift and trainers without shifting**: ShiftLink sits between the trainer and the app (Bluetooth FTMS or Wi-Fi DIRCON), with drivetrains from 1 to 30 gears and named profiles.
+- **Training**: structured workouts (import .erg, .mrc, .fit, .zwo), ERG mode, ride recording to .fit, upload to Garmin Connect and Intervals.icu, heart-rate strap, KICKR Headwind fan.
+- **Simple**: setup wizard, "Not working?" diagnostics, 9 languages (EN, FR, DE, ES, IT, PL, NL, PT, ZH), no account, no tracking.
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/captures/capture_1_ride_light.png" width="200" alt="Ride screen">
+  <img src="docs/captures/capture_2_ride_zwift.png" width="200" alt="Virtual gears for Zwift">
+  <img src="docs/captures/capture_3_onboarding_1.png" width="200" alt="Setup wizard">
+  <img src="docs/captures/capture_4_compatible.png" width="200" alt="Supported controllers">
+</p>
+<p align="center">
+  <img src="docs/captures/capture_5_seances.png" width="200" alt="Workouts">
+  <img src="docs/captures/capture_6_sorties.png" width="200" alt="Rides">
+  <img src="docs/captures/capture_7_conseils.png" width="200" alt="Tips">
+</p>
+
+## How it works
+
+The smart trainer stays connected directly to the app, which handles resistance and
+virtual gears. ShiftLink reads the controller's buttons and sends "gear + / −" to the app:
+
+| App | How |
 |---|---|
-| MyWhoosh | Connexion « Link » (Wi-Fi local, TCP 21587, même protocole que l'app MyWhoosh Link) |
-| Rouvy | Clavier Bluetooth : `.` et `,` (activer les « Virtual Shifting Controls ») |
-| TrainingPeaks Virtual | Clavier Bluetooth : `+` et `−` du pavé numérique |
-| Biketerra | Clavier Bluetooth : `W` et `S` |
-| Autres applis avec raccourcis clavier | Clavier Bluetooth, touches personnalisées |
-| Applis compatibles OpenBikeControl | Protocole ouvert, découverte automatique sur le Wi-Fi (TCP 36867) |
-| Zwift et applis sans vitesses virtuelles | Mode « Vitesses virtuelles ShiftLink » (voir plus bas) |
+| MyWhoosh | "Link" connection (local Wi-Fi, TCP 21587, same protocol as the MyWhoosh Link app) |
+| Rouvy | Bluetooth keyboard: `.` and `,` (enable "Virtual Shifting Controls") |
+| TrainingPeaks Virtual | Bluetooth keyboard: numpad `+` and `−` |
+| Biketerra | Bluetooth keyboard: `W` and `S` |
+| Other apps with keyboard shortcuts | Bluetooth keyboard, custom keys |
+| OpenBikeControl-compatible apps | Open protocol, automatic discovery on Wi-Fi (TCP 36867) |
+| Zwift and apps without virtual shifting | "ShiftLink virtual gears" mode (see below) |
 
-En mode clavier, le téléphone se présente comme un clavier Bluetooth (profil HID,
-Android 9 ou plus) à l'ordinateur ou la tablette où tourne l'appli.
+In keyboard mode, the phone presents itself as a Bluetooth keyboard (HID profile,
+Android 9 or later) to the computer or tablet running the app.
 
-## Installer l'APK
+## Installing the APK
 
-ShiftLink n'est pas sur le Play Store : l'APK se télécharge depuis la page
-**Releases** de ce dépôt.
+ShiftLink is not on the Play Store: download the APK from this repository's
+**Releases** page.
 
-1. Sur le téléphone Android (8 ou plus), ouvre la dernière release et touche
-   `ShiftLink-x.y.z.apk` pour le télécharger.
-2. Ouvre le fichier téléchargé. Si Android le demande, autorise ton navigateur
-   (ou ton gestionnaire de fichiers) à **installer des applis inconnues**, puis
-   touche **Installer**.
-3. Si Play Protect affiche « Appli non reconnue », touche **Plus de détails >
-   Installer quand même**. C'est normal pour une appli hors Play Store.
-4. Lance ShiftLink : l'assistant de démarrage te guide pour le reste.
+1. On your Android phone (8 or later), open the latest release and tap
+   `ShiftLink-x.y.z.apk` to download it.
+2. Open the downloaded file. If Android asks, allow your browser (or file
+   manager) to **install unknown apps**, then tap **Install**.
+3. If Play Protect shows "Unrecognized app", tap **More details > Install
+   anyway**. This is normal for an app outside the Play Store.
+4. Launch ShiftLink: the setup wizard guides you through the rest.
 
-### Autoriser les paramètres restreints (Android 13 et plus)
+### Allow restricted settings (Android 13 and later)
 
-Pour toucher l'écran à ta place, lire les télécommandes Bluetooth ou les
-touches de volume, ShiftLink utilise un **service d'accessibilité**. Sur une
-appli installée hors Play Store, Android grise ce service et affiche
-« Paramètre restreint ». Pour le débloquer, une seule fois :
+To tap the screen for you, or read Bluetooth remotes and volume keys, ShiftLink
+uses an **accessibility service**. For apps installed outside the Play Store,
+Android greys this service out and shows "Restricted setting". To unlock it,
+once:
 
-1. Essaie d'activer ShiftLink dans **Paramètres > Accessibilité > Applis
-   installées** : Android refuse et affiche « Paramètre restreint ». C'est cette
-   tentative qui débloque l'étape suivante.
-2. Va dans **Paramètres > Applis > ShiftLink**.
-3. Touche le menu **⋮** en haut à droite, puis **Autoriser les paramètres
-   restreints**, et confirme avec ton code ou ton empreinte.
-4. Reviens dans **Paramètres > Accessibilité > ShiftLink** et active le service.
+1. Try to enable ShiftLink in **Settings > Accessibility > Installed apps**:
+   Android refuses and shows "Restricted setting". This attempt is what unlocks
+   the next step.
+2. Go to **Settings > Apps > ShiftLink**.
+3. Tap the **⋮** menu in the top right, then **Allow restricted settings**, and
+   confirm with your PIN or fingerprint.
+4. Go back to **Settings > Accessibility > ShiftLink** and enable the service.
 
-ShiftLink t'y guide depuis l'assistant et depuis Réglages > Ça ne marche pas ?
-Le service d'accessibilité n'est utile que pour les touches à l'écran et les
-télécommandes : les manettes Bluetooth, le clavier Bluetooth, MyWhoosh Link et
-OpenBikeControl marchent sans lui.
+ShiftLink guides you through this from the setup wizard and from Settings > Not
+working? The accessibility service is only needed for on-screen taps and
+remotes: Bluetooth controllers, Bluetooth keyboard, MyWhoosh Link and
+OpenBikeControl work without it.
 
-Les noms de menus varient un peu selon la marque (Samsung, Xiaomi…). Si le
-menu ⋮ n'apparaît pas, refais l'étape 1 puis réessaie.
+Menu names vary a little by brand (Samsung, Xiaomi…). If the ⋮ menu does not
+appear, repeat step 1 and try again.
 
-### Mettre à jour
+### Updating
 
-Télécharge le nouvel APK et installe-le par-dessus : les réglages sont gardés.
-Les APK des releases sont tous signés avec la même clé. Une version compilée
-par quelqu'un d'autre ne s'installe pas par-dessus (il faut d'abord
-désinstaller, ce qui efface les réglages ; fais une sauvegarde avant dans
-Réglages > Sauvegarde et partage).
+Download the new APK and install it over the old one: your settings are kept.
+All release APKs are signed with the same key. A build compiled by someone else
+will not install over it (you would have to uninstall first, which erases your
+settings; make a backup first in Settings > Backup and sharing).
 
-### Vérifier le fichier (facultatif)
+### Verifying the file (optional)
 
-Chaque release donne l'empreinte SHA-256 de l'APK. Sur un ordinateur :
-`sha256sum ShiftLink-x.y.z.apk` (Linux/macOS) ou
+Each release lists the APK's SHA-256 fingerprint. On a computer:
+`sha256sum ShiftLink-x.y.z.apk` (Linux/macOS) or
 `certutil -hashfile ShiftLink-x.y.z.apk SHA256` (Windows).
 
-## Vitesses virtuelles ShiftLink (Zwift…)
+## ShiftLink virtual gears (Zwift…)
 
-ShiftLink se connecte lui-même au home trainer (FTMS, Bluetooth) et se présente à
-l'appli comme un trainer Wi-Fi (protocole Wahoo Direct Connect, TCP 36866, mDNS
-`_wahoo-fitness-tnp._tcp`). Quand l'appli demande une pente, ShiftLink l'ajuste
-selon la vitesse engagée avant de l'envoyer au trainer :
+ShiftLink connects to the smart trainer itself (FTMS, Bluetooth) and presents
+itself to the app as a Wi-Fi trainer (Wahoo Direct Connect protocol, TCP 36866,
+mDNS `_wahoo-fitness-tnp._tcp`). When the app requests a grade, ShiftLink adjusts
+it for the selected gear before sending it to the trainer:
 
-- pente + roulement multipliés par le rapport k de la vitesse ;
-- coefficient aérodynamique multiplié par k³, vent divisé par k.
+- grade + rolling resistance multiplied by the gear ratio k;
+- aerodynamic coefficient multiplied by k³, wind divided by k.
 
-24 vitesses, du rapport ×0,5 au rapport ×2. En mode ERG, la puissance passe
-telle quelle et les vitesses n'ont pas d'effet.
+24 gears, from ratio ×0.5 to ×2. In ERG mode, power passes through unchanged and
+gears have no effect.
 
-## Manettes reconnues
+## Supported controllers
 
-| Manette | Remarque |
+| Controller | Notes |
 |---|---|
 | ThinkRider VS200 | |
 | CYCPLUS BC2 | |
-| Zwift Click (1re génération) | |
-| Zwift Click v2 | Réglage « Click v2 : côté droit seul » : rien à faire dans Zwift (+ = plus dur, B = plus facile). Sinon, la connecter 30 s dans l'appli Zwift chaque jour pour avoir les deux côtés |
-| Zwift Play (firmware 2) | Chaque poignée se connecte seule (bêta) |
-| Zwift Play | Gauche = vitesse −, droite = vitesse + (bouton latéral ou palette) |
-| Zwift Ride et Ride V2 | Connexion à la poignée gauche, qui relaie la droite. La Ride V2 (firmware 1.3 et plus) doit être déverrouillée dans l'appli Zwift : ShiftLink le dit quand elle est verrouillée |
-| WHEELTOP EDS (OX, TX) | Bêta. Dérailleur arrière éteint. Interrupteur sur R = vitesses, sur T = deux boutons de plus |
-| Elite Square | Leviers de vitesses gauche et droit |
-| Shimano Di2 | Boutons réglés en canaux D-Fly dans E-TUBE : canaux 1/3 = +, 2/4 = − |
-| SRAM AXS | Un appui = +, double appui = − |
-| Wahoo KICKR Bike, Bike Shift, Bike Pro | Boutons droits = +, gauches = − |
-| Tacx NEO Bike (Smart, Plus) | Bêta. Firmware 4.5 et plus. Chaque changement de vitesse sur les manettes = + ou −, boutons gauche / droit = tourner. Relier aussi le vélo comme home trainer |
-| Elite Sterzo Smart | Direction : tourner le guidon fait tourner le coureur (maintien gauche / droite) |
-| Elite Rizer | Bêta. Direction comme le Sterzo, et l'avant du vélo suit la pente de l'appli ; la pente qu'il rapporte s'affiche, un refus est noté dans le journal |
-| Wahoo KICKR Climb | Bêta, dans Appareils > Accessoires : l'avant du vélo suit la pente de l'appli (−10 à +19 %) |
-| Ce téléphone au guidon | Réglages > Tourner avec ce téléphone. Marche dans n'importe quelle position du téléphone |
+| Zwift Click (1st generation) | |
+| Zwift Click v2 | "Click v2: right side only" setting: nothing to do in Zwift (+ = harder, B = easier). Otherwise, connect it to the Zwift app for 30 s each day to get both sides |
+| Zwift Play (firmware 2) | Each handle connects on its own (beta) |
+| Zwift Play | Left = gear −, right = gear + (side button or paddle) |
+| Zwift Ride and Ride V2 | Connects to the left handle, which relays the right one. Ride V2 (firmware 1.3+) must be unlocked in the Zwift app: ShiftLink tells you when it is locked |
+| WHEELTOP EDS (OX, TX) | Beta. Rear derailleur off. Switch on R = gears, on T = two extra buttons |
+| Elite Square | Left and right shift levers |
+| Shimano Di2 | Buttons set to D-Fly channels in E-TUBE: channels 1/3 = +, 2/4 = − |
+| SRAM AXS | Single press = +, double press = − |
+| Wahoo KICKR Bike, Bike Shift, Bike Pro | Right buttons = +, left = − |
+| Tacx NEO Bike (Smart, Plus) | Beta. Firmware 4.5+. Each shift on the levers = + or −, left / right buttons = steer. Also pair the bike as a trainer |
+| Elite Sterzo Smart | Steering: turning the handlebar steers the rider (hold left / right) |
+| Elite Rizer | Beta. Steering like the Sterzo, and the front of the bike follows the app's grade; the reported grade is shown, a refusal is logged |
+| Wahoo KICKR Climb | Beta, in Devices > Accessories: the front of the bike follows the app's grade (−10 to +19 %) |
+| This phone on the handlebar | Settings > Steer with this phone. Works in any phone position |
 
-Sans manette, les gros boutons + et − de l'écran marchent aussi.
+Without a controller, the large on-screen + and − buttons work too.
 
-## Utilisation
+## Usage
 
-Au premier lancement, un assistant en 6 étapes guide la configuration : choix de
-l'appli, autorisations, recherche et test de la manette, connexion à l'appli.
-Il peut être relancé depuis les réglages.
+On first launch, a 6-step wizard guides setup: choice of app, permissions,
+controller search and test, connection to the app. It can be run again from
+Settings.
 
-Pendant la séance, l'écran principal montre si tout est prêt, la vitesse en cours
-(mode Zwift / proxy) ou le dernier changement, et l'état de chaque appareil.
+During a ride, the main screen shows whether everything is ready, the current
+gear (Zwift / proxy mode) or the last shift, and the status of each device.
 
-Pour MyWhoosh : le téléphone et l'appareil MyWhoosh doivent être sur le même Wi-Fi
-(pas de réseau invité ni d'isolation des clients), et l'app « MyWhoosh Link » doit
-être fermée (elle utilise le même port). Dans MyWhoosh, choisir la connexion « Link ».
+For MyWhoosh: the phone and the MyWhoosh device must be on the same Wi-Fi (no
+guest network or client isolation), and the "MyWhoosh Link" app must be closed
+(it uses the same port). In MyWhoosh, choose the "Link" connection.
 
-ShiftLink peut tourner sur le même appareil que l'appli : une notification
-« ShiftLink est actif » le garde en vie en arrière-plan.
+ShiftLink can run on the same device as the app: a "ShiftLink is active"
+notification keeps it alive in the background.
 
-Captures et icônes : `flutter test test_screens --update-goldens` (dans `test_screens/out`).
+Screenshots and icons: `flutter test test_screens --update-goldens` (in `test_screens/out`).
 
-## Boutons personnalisables
+## Customizable buttons
 
-Appareils > (ta manette) : chaque bouton peut faire une action différente
-au clic, au double clic et à l'appui long (vitesses, direction, demi-tour, caméra,
-intensité ERG, musique, volume, retour Android…). Les actions proposées dépendent de
-l'appli choisie. Le réglage est enregistré par appli. Un bandeau affiche en direct le
-bouton appuyé et l'action déclenchée.
+Devices > (your controller): each button can trigger a different action on
+single press, double press and long press (gears, steering, U-turn, camera, ERG
+intensity, music, volume, Android back…). The available actions depend on the
+chosen app. Settings are saved per app. A live banner shows the button pressed
+and the action triggered.
 
-Combinaisons : deux boutons appuyés ensemble déclenchent leur propre action (par
-exemple + et − ensemble pour changer de plateau). Les délais du double clic et de
-l'appui long se règlent au même endroit.
+Combos: two buttons pressed together trigger their own action (for example + and
+− together to change chainring). Double-press and long-press timings are set in
+the same place.
 
-Sur le même téléphone, ShiftLink touche les boutons de l'appli à l'écran : positions
-par défaut pour Rouvy, TPV et MyWhoosh, réglables action par action, et « Montrer les
-cibles » pour vérifier.
+On the same phone, ShiftLink taps the app's on-screen buttons: default positions
+for Rouvy, TPV and MyWhoosh, adjustable per action, with "Show targets" to check.
 
-## Vitesses virtuelles réglables (mode Zwift / trainer ShiftLink)
+## Adjustable virtual gears (Zwift mode / ShiftLink trainer)
 
-Réglages > Vitesses virtuelles (ou l'icône de réglage sur la carte des vitesses) :
-transmission (24 vitesses régulières, route 2×12 et 2×11, gravel 1×12, VTT 1×12),
-plateaux, double plateau avec l'action « Changer de plateau », braquet réel engagé sur
-le trainer, effet des pentes, poids, lissage des pentes, pas de l'intensité en ERG
-(actions « Intensité + / − »), vibration et son à chaque vitesse.
+Settings > Virtual gears (or the settings icon on the gear card): drivetrain (24
+even gears, road 2×12 and 2×11, gravel 1×12, MTB 1×12), chainrings, double
+chainring with the "Change chainring" action, real gear engaged on the trainer,
+grade effect, weight, grade smoothing, ERG intensity step ("Intensity + / −"
+actions), vibration and sound on each shift.
 
-Depuis la 1.9 :
-- transmission personnalisée : de 1 à 30 vitesses, chaque braquet réglable au doigt (pas de 0,05) ;
-- profils nommés (« Montagne », « Sprint »…), repris automatiquement avec le même trainer ;
-- pilotage du trainer : pente, puissance cible (watts calculés pour la vitesse à ta cadence)
-  ou résistance simple ; « Auto » choisit selon ce que le trainer annonce ;
-- filtre de cadence, mode « simple relais » sans vitesses ;
-- l'appli peut se connecter en Wi-Fi (DIRCON) ou en Bluetooth (ShiftLink se présente comme
-  un home trainer FTMS) ;
-- « MyWhoosh avec les vitesses ShiftLink » à la place de MyShift.
+Since 1.9:
+- custom drivetrain: 1 to 30 gears, each ratio adjustable by touch (0.05 steps);
+- named profiles ("Mountain", "Sprint"…), picked up automatically with the same trainer;
+- trainer control: grade, target power (watts computed for the speed at your
+  cadence) or plain resistance; "Auto" picks based on what the trainer supports;
+- cadence filter, "simple relay" mode without gears;
+- the app can connect over Wi-Fi (DIRCON) or Bluetooth (ShiftLink presents itself
+  as an FTMS trainer);
+- "MyWhoosh with ShiftLink gears" instead of MyShift.
 
-Testé le 6 novembre 2026 : ThinkRider VS200 + MyWhoosh en OpenBikeControl, ça marche.
+Tested on 6 November 2026: ThinkRider VS200 + MyWhoosh over OpenBikeControl works.
 
-MyWhoosh (mode normal) se connecte en OpenBikeControl (icône guidon de l'écran des
-connexions) ou, sur les anciennes versions, en Link.
+MyWhoosh (normal mode) connects over OpenBikeControl (handlebar icon on the
+connections screen) or, on older versions, over Link.
 
-## Télécommandes, affichage, diagnostic
+## Remotes, overlay, diagnostics
 
-- Réglages > Télécommandes : les télécommandes Bluetooth, manettes de jeu et claviers
-  appairés au téléphone servent de manette (par défaut, volume / croix haut-bas =
-  vitesses). Leurs touches passent par le service d'accessibilité.
-- Affichage par-dessus l'appli : petite fenêtre déplaçable (vitesse, watts, cadence,
-  ERG ou dernière action).
-- Réglages > Ça ne marche pas ? : vérifie Bluetooth, autorisations, manette, Wi-Fi,
-  trainer, appli et arrière-plan, et propose la correction.
-- Langue : français, anglais, allemand, espagnol, italien ou polonais (Réglages > Affichage > Langue ; « Auto » suit le
-  téléphone). Chaque langue a son fichier `lib/src/i18n_xx.dart`, avec le texte
-  français comme clé. Le journal reste en français.
-- Accessibilité : la vitesse est annoncée par le lecteur d'écran à chaque changement,
-  et les écrans sont vérifiés avec un texte agrandi à 160 %.
+- Settings > Remotes: Bluetooth remotes, gamepads and keyboards paired with the
+  phone act as controllers (by default, volume / D-pad up-down = gears). Their
+  keys go through the accessibility service.
+- Overlay on top of the app: a small movable window (gear, watts, cadence, ERG or
+  last action).
+- Settings > Not working?: checks Bluetooth, permissions, controller, Wi-Fi,
+  trainer, app and background, and offers the fix.
+- Language: English, French, German, Spanish, Italian, Polish, Dutch, Portuguese
+  or Chinese (Settings > Display > Language; "Auto" follows the phone). Each
+  language has its own file `lib/src/i18n_xx.dart`, with the French text as the
+  key. The log stays in French.
+- Accessibility: the gear is announced by the screen reader on each change, and
+  screens are checked with text enlarged to 160 %.
 
-## Capteurs et sorties (2.x)
+## Sensors and outputs (2.x)
 
-- Ceinture cardio Bluetooth : le pouls s'affiche, s'enregistre et part vers l'appli
-  quand ShiftLink gère les vitesses.
-- Ventilateur Wahoo KICKR Headwind (bêta) : à la main (actions « Ventilateur + / − »),
-  selon ta vitesse, ta puissance ou ton cardio (celui du ventilateur, ou la ceinture
-  reliée à ShiftLink), avec un réglage « démarre à / à fond à ».
-- Enregistrer la sortie : fichier .fit (puissance, cadence, vitesse, cardio, distance)
-  à envoyer sur Strava, Garmin Connect ou intervals.icu.
-- Applis connectées (Réglages > Automatique > Applis connectées) : Garmin Connect
-  et Intervals.icu (clé API). Strava se connecte dans MyWhoosh. Garmin Connect : chaque sortie enregistrée
-  part toute seule sur Garmin Connect, et un .fit venu de MyWhoosh peut y être envoyé à
-  la main. Le fichier est d'abord réparé : moyennes de puissance, de cardio et de
-  cadence ajoutées, température retirée. La connexion reprend
-  celle de l'appli Garmin Connect mobile, comme
-  [python-garminconnect](https://github.com/cyberjunky/python-garminconnect) (MIT) : page
-  de connexion de Garmin dans l'appli, ticket échangé contre un jeton gardé sur le
-  téléphone. Ce n'est pas une API officielle : Garmin peut la changer.
-- Compte MyWhoosh (même page) : ShiftLink récupère tes sorties et leur .fit d'origine
-  chez MyWhoosh, puis envoie les nouvelles sur Garmin Connect à l'ouverture de l'appli
-  (les plus anciennes, à la main depuis « Mes sorties MyWhoosh »). Le mot de passe ne
-  sert qu'à la connexion ; seule la session est gardée sur le téléphone. API privée de
-  l'appli MyWhoosh, non officielle : elle peut changer.
-- Réglages > Sauvegarde et partage : fichier, QR code ou texte à copier, sans compte.
-  Les appareils appairés restent sur le téléphone.
+- Bluetooth heart-rate strap: heart rate is shown, recorded and sent to the app
+  when ShiftLink handles the gears.
+- Wahoo KICKR Headwind fan (beta): manual ("Fan + / −" actions), or driven by
+  your speed, power or heart rate (the fan's own strap, or the one paired with
+  ShiftLink), with a "starts at / full at" setting.
+- Ride recording: .fit file (power, cadence, speed, heart rate, distance) to send
+  to Strava, Garmin Connect or intervals.icu.
+- Connected apps (Settings > Automatic > Connected apps): Garmin Connect and
+  Intervals.icu (API key). Strava is connected in MyWhoosh. Garmin Connect: each
+  recorded ride is uploaded automatically, and a .fit from MyWhoosh can be sent
+  manually. The file is repaired first: power, heart-rate and cadence averages
+  added, temperature removed. The login reuses the Garmin Connect mobile app's
+  flow, like [python-garminconnect](https://github.com/cyberjunky/python-garminconnect)
+  (MIT): Garmin's login page inside the app, ticket exchanged for a token kept on
+  the phone. This is not an official API: Garmin may change it.
+- MyWhoosh account (same page): ShiftLink fetches your rides and their original
+  .fit from MyWhoosh, then uploads new ones to Garmin Connect when the app opens
+  (older ones manually from "My MyWhoosh rides"). The password is only used to
+  log in; only the session is kept on the phone. Private, unofficial MyWhoosh
+  app API: it may change.
+- Settings > Backup and sharing: file, QR code or text to copy, no account
+  needed. Paired devices stay on the phone.
 
-## Nouveautés 2.3
+## What's new in 2.3
 
-- Home trainers : en plus du FTMS, les anciens Tacx et autres trainers **FE-C** en Bluetooth
-  (commandes traduites en pages ANT+ FE-C) et les trainers **Wi-Fi** (client DIRCON,
-  découverte `_wahoo-fitness-tnp._tcp`).
-- Capteurs **cadence** (CSC) et **puissance** (Cycling Power) : la cadence sert aux vitesses,
-  les watts du capteur peuvent remplacer ceux du trainer vers l'appli.
-- **Test de résistance** (10 s facile, 10 s dur) dans la connexion au trainer.
-- **ERG sans appli** (départ à la dernière cible ou à ta puissance) et **séance escalier**.
-- Manettes : « Ce n'est pas la mienne » (appareil ignoré pour toujours), **mise en veille**
-  5 min après la fin de séance, **vibration des manettes de jeu** à chaque vitesse.
-- **Enregistrement automatique** des sorties, envoi à **Health Connect**, intent
-  `app.shiftlink.ACTION` pour Tasker / MacroDroid (extras : action, button, gesture, device).
+- Trainers: besides FTMS, older Tacx and other Bluetooth **FE-C** trainers
+  (commands translated to ANT+ FE-C pages) and **Wi-Fi** trainers (DIRCON client,
+  `_wahoo-fitness-tnp._tcp` discovery).
+- **Cadence** (CSC) and **power** (Cycling Power) sensors: cadence drives the
+  gears, and the sensor's watts can replace the trainer's towards the app.
+- **Resistance test** (10 s easy, 10 s hard) in the trainer connection.
+- **ERG without an app** (starts at the last target or your power) and **staircase workout**.
+- Controllers: "Not mine" (device ignored forever), **sleep** 5 min after the end
+  of a ride, **gamepad vibration** on each shift.
+- **Automatic ride recording**, export to **Health Connect**, `app.shiftlink.ACTION`
+  intent for Tasker / MacroDroid (extras: action, button, gesture, device).
 - Android 8 minimum (Health Connect).
 
-## Nouveautés 2.7 (idées reprises de QZ / qdomyos-zwift)
+## What's new in 2.7 (ideas taken from QZ / qdomyos-zwift)
 
-- **Cyclistes** : un profil par personne (prénom, poids, FTP, cardio max, profil de vitesses
-  facultatif), choisi d'un appui en haut de l'écran Rouler. Le poids règle les vitesses virtuelles.
-- **Séances sans appli** : le trainer suit une séance en ERG (watts = % de la FTP du cycliste).
-  Trois séances fournies (balade, pyramide, 30/30) et import des fichiers Zwift **.zwo**
-  (SteadyState, Warmup, Cooldown, Ramp, IntervalsT, FreeRide, MaxEffort). Le chrono attend quand
-  on ne pédale pas ; les boutons Intensité ± restent actifs ; l'appli qui reprend la main arrête la séance.
-- **Zones cardio** (60/70/80/90 % du cardio max) en couleur pendant la sortie.
-- **Watts estimés** d'après la vitesse et le poids quand le trainer n'envoie pas de puissance
-  (aussi transmis à l'appli).
-- **Chiffres affichés** au choix (watts, cadence, pente/cible, cardio, vitesse ; 4 au plus).
-- Applis qui gèrent leurs vitesses : la cassette dessine **un pignon par vitesse de l'appli**
-  (MyWhoosh 30, Zwift/Rouvy et autres 24 ; réglable d'un appui).
-- Direction au téléphone : le zéro est pris au bout de 1,5 s même si le guidon vibre ; message si le
-  téléphone n'a pas de gyroscope ; la carte « Téléphone au guidon » ne s'ajoute plus en haut de la liste.
+- **Riders**: one profile per person (first name, weight, FTP, max heart rate,
+  optional gear profile), picked with one tap at the top of the Ride screen.
+  Weight drives the virtual gears.
+- **Workouts without an app**: the trainer follows a workout in ERG (watts = % of
+  the rider's FTP). Three built-in workouts (easy ride, pyramid, 30/30) and import
+  of Zwift **.zwo** files (SteadyState, Warmup, Cooldown, Ramp, IntervalsT,
+  FreeRide, MaxEffort). The timer pauses when you stop pedalling; Intensity ±
+  buttons stay active; an app taking control stops the workout.
+- **Heart-rate zones** (60/70/80/90 % of max HR) in colour during the ride.
+- **Estimated watts** from speed and weight when the trainer sends no power (also
+  sent to the app).
+- **Displayed metrics** of your choice (watts, cadence, grade/target, heart rate,
+  speed; up to 4).
+- Apps that handle their own gears: the cassette draws **one cog per app gear**
+  (MyWhoosh 30, Zwift/Rouvy and others 24; adjustable with one tap).
+- Phone steering: zero is taken after 1.5 s even if the handlebar vibrates;
+  message if the phone has no gyroscope; the "Phone on handlebar" card no longer
+  jumps to the top of the list.
 
-## Nouveautés 2.10
+## What's new in 2.10
 
-- **Carte et dénivelé dans le .fit** : une sortie sur un parcours GPX garde sa position et son altitude
-  (sortie « virtuelle »), donc Strava et Intervals.icu montrent la carte et le D+.
-- **Reprendre un parcours** là où on s'est arrêté, ou partir du km de son choix. Le record (fantôme)
-  ne compte que pour un parcours fait depuis le début.
-- **Un tour par bloc de séance** dans le .fit (watts, cardio et cadence moyens de chaque intervalle).
-- **Fichiers .zwo** : la cadence demandée (`Cadence`, `CadenceResting`) et les messages (`textevent`)
-  s'affichent pendant la séance et sont lus par la voix.
-- **Calibration (spin down)** du home trainer, pour les trainers FTMS qui l'annoncent.
-- **Jusqu'à 200 parcours** (un fichier chacun dans le dossier de l'appli, plus dans les préférences),
-  et les fichiers GPX jusqu'à 4 Mo sont acceptés. Les parcours ne font pas partie de la sauvegarde des réglages.
+- **Map and elevation in the .fit**: a ride on a GPX route keeps its position and
+  altitude ("virtual" ride), so Strava and Intervals.icu show the map and climbing.
+- **Resume a route** where you stopped, or start from any km. The record (ghost)
+  only counts for a route ridden from the start.
+- **One lap per workout block** in the .fit (average watts, heart rate and cadence
+  for each interval).
+- **.zwo files**: requested cadence (`Cadence`, `CadenceResting`) and messages
+  (`textevent`) are shown during the workout and read aloud.
+- Trainer **calibration (spin down)**, for FTMS trainers that support it.
+- **Up to 200 routes** (one file each in the app folder, no longer in
+  preferences), and GPX files up to 4 MB are accepted. Routes are not part of the
+  settings backup.
 
-## Sécurité
+## Security
 
-- Les serveurs réseau (OpenBikeControl, Link, trainer Wi-Fi) n'acceptent que les
-  appareils du réseau local, jamais une adresse Internet.
-- Le trainer Bluetooth n'accepte qu'une appli à la fois et rejette les commandes
-  mal formées. La puissance demandée est bornée à 2000 W.
-- Le fichier de codes du Sterzo est vérifié par son empreinte SHA-256.
-- Pas de compte, pas de pistage, pas de sauvegarde cloud des réglages, pas de trafic
-  HTTP en clair.
+- Network servers (OpenBikeControl, Link, Wi-Fi trainer) only accept devices on
+  the local network, never an Internet address.
+- The Bluetooth trainer accepts only one app at a time and rejects malformed
+  commands. Requested power is capped at 2000 W.
+- The Sterzo code file is verified by its SHA-256 fingerprint.
+- No account, no tracking, no cloud backup of settings, no plain-text HTTP traffic.
 
-## Compiler
+## Building
 
 ```
 flutter test
 flutter build apk --release
 ```
 
-Pour signer avec la clé ShiftLink (indispensable pour que les mises à jour
-s'installent par-dessus l'ancienne version), placer `android/key.properties` :
+To sign with the ShiftLink key (required for updates to install over the
+previous version), add `android/key.properties`:
 
 ```
 storePassword=…
 keyPassword=…
 keyAlias=shiftlink
-storeFile=/chemin/vers/shiftlink.jks
+storeFile=/path/to/shiftlink.jks
 ```
 
-## Licence et sources
+## License and sources
 
-ShiftLink est publié sous GPL-3.0 (voir `LICENSE`). Son code est écrit pour
+ShiftLink is released under GPL-3.0 (see `LICENSE`). Its code is written for
 ShiftLink.
 
-Les protocoles des appareils (identifiants Bluetooth, forme des trames, messages
-réseau) sont des faits imposés par le matériel et les applis : ShiftLink les applique
-tels quels pour que ça marche. Sources publiques utilisées :
+Device protocols (Bluetooth identifiers, frame layouts, network messages) are
+facts imposed by the hardware and apps: ShiftLink applies them as-is so things
+work. Public sources used:
 
-- Zwift Click et Play : [ajchellew/zwiftplay](https://github.com/ajchellew/zwiftplay) ;
-  Zwift Ride et Click v2 : [Makinolo, « Zwift Ride protocol »](https://www.makinolo.com/blog/2024/07/26/zwift-ride-protocol/) ;
-- Zwift Ride V2, WHEELTOP EDS, Elite Rizer, CYCPLUS T7, Tacx NEO Bike : descriptions publiques des protocoles par
-  [OpenBikeControl](https://github.com/OpenBikeControl/bikecontrol) (faits de protocole seulement, aucun code repris) ;
-- KICKR Climb : relevé au sniffer de [Redback Operations](https://github.com/Redback-Operations/redback-smartbike-iot) (GPL-3.0) ;
-- Elite Sterzo : [pycycling](https://github.com/zacharyedwardbull/pycycling) (MIT), dont
-  le fichier de codes de réponse est téléchargé au premier usage ;
-- OpenBikeControl : [openbikecontrol.org](https://openbikecontrol.org), protocole ouvert ;
-- raccourcis clavier : aides des applis (Rouvy, Zwift…) ;
-- les autres appareils (ThinkRider, CYCPLUS, Elite Square, Shimano Di2, SRAM AXS,
-  Wahoo KICKR Bike, Headwind, MyWhoosh Link) : identifiants et formats de trames
-  connus publiquement, appliqués dans un code écrit pour ShiftLink.
+- Zwift Click and Play: [ajchellew/zwiftplay](https://github.com/ajchellew/zwiftplay);
+  Zwift Ride and Click v2: [Makinolo, "Zwift Ride protocol"](https://www.makinolo.com/blog/2024/07/26/zwift-ride-protocol/);
+- Zwift Ride V2, WHEELTOP EDS, Elite Rizer, CYCPLUS T7, Tacx NEO Bike: public
+  protocol descriptions by [OpenBikeControl](https://github.com/OpenBikeControl/bikecontrol)
+  (protocol facts only, no code reused);
+- KICKR Climb: sniffer capture by [Redback Operations](https://github.com/Redback-Operations/redback-smartbike-iot) (GPL-3.0);
+- Elite Sterzo: [pycycling](https://github.com/zacharyedwardbull/pycycling) (MIT),
+  whose response-code file is downloaded on first use;
+- OpenBikeControl: [openbikecontrol.org](https://openbikecontrol.org), open protocol;
+- keyboard shortcuts: the apps' help pages (Rouvy, Zwift…);
+- other devices (ThinkRider, CYCPLUS, Elite Square, Shimano Di2, SRAM AXS, Wahoo
+  KICKR Bike, Headwind, MyWhoosh Link): publicly known identifiers and frame
+  formats, applied in code written for ShiftLink.
 
-ShiftLink est un projet indépendant. Il n'est affilié ni à MyWhoosh, ni à Zwift, ni à
-BikeControl / OpenBikeControl, ni aux fabricants des manettes.
+ShiftLink is an independent project. It is not affiliated with MyWhoosh, Zwift,
+BikeControl / OpenBikeControl, or the controller manufacturers.
