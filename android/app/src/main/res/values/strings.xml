@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="accessibility_label">ShiftLink : vitesses à l’écran</string>
+    <string name="accessibility_description">Permet à ShiftLink de toucher les boutons + et − de ton appli d’entraînement quand tu appuies sur ta manette. ShiftLink ne lit pas le contenu de l’écran : il retient seulement quelle appli est au premier plan.</string>
+    <string name="weekly_widget_description">Totaux de la semaine : temps, km, sorties.</string>
+    <string name="weekly_widget_title">MA SEMAINE</string>
+    <string name="weekly_widget_time">temps</string>
+    <string name="weekly_widget_km">km</string>
+    <string name="weekly_widget_rides">sorties</string>
+</resources>
