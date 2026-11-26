@@ -1,5 +1,5 @@
 // Nouvelle version de ShiftLink : ShiftLink n'est pas sur le Play Store, donc personne
-// n'est prévenu d'une mise à jour. Si on l'active, ShiftLink lit une fois par jour la
+// n'est prévenu d'une mise à jour. Si on l'active, ShiftLink lit à chaque ouverture la
 // dernière release du dépôt GitHub (rien d'autre n'est envoyé que la requête elle-même).
 import 'dart:convert';
 import 'dart:io';

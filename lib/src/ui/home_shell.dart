@@ -21,14 +21,28 @@ class HomeShell extends StatefulWidget {
   State<HomeShell> createState() => _HomeShellState();
 }
 
-class _HomeShellState extends State<HomeShell> {
+class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   late int tab = widget.initialTab;
+
+  /// Dernière recherche de mise à jour (ouverture ou retour dans l'appli).
+  DateTime? _lastUpdateCheck;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _whatsNew());
+    WidgetsBinding.instance.addObserver(this);
     widget.app.onNotice = _notice;
+  }
+
+  /// ShiftLink reste souvent en arrière-plan : revenir dans l'appli compte comme une
+  /// ouverture (pas plus d'une recherche toutes les 30 min, pour ne pas gêner pendant la sortie).
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+    final last = _lastUpdateCheck;
+    if (last != null && DateTime.now().difference(last) < const Duration(minutes: 30)) return;
+    _offerUpdate();
   }
 
   /// Message court en bas de l'écran (refus de Power Lock, verrou relâché…).
@@ -41,6 +55,7 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     if (widget.app.onNotice == _notice) widget.app.onNotice = null;
     super.dispose();
   }
@@ -55,6 +70,20 @@ class _HomeShellState extends State<HomeShell> {
     }
     if (!mounted) return;
     if (widget.app.shouldShowWhatsNew(version)) await showWhatsNew(context, onlyLatest: true);
+    await _offerUpdate(version);
+  }
+
+  /// Cherche une nouvelle version et propose « Mettre à jour ».
+  Future<void> _offerUpdate([String? version]) async {
+    if (widget.app.demo) return;
+    _lastUpdateCheck = DateTime.now();
+    if (version == null) {
+      try {
+        version = (await PackageInfo.fromPlatform()).version;
+      } catch (_) {
+        return;
+      }
+    }
     final u = await widget.app.checkForUpdate(version);
     if (u == null || !mounted || widget.app.update.value == null) return;
     ScaffoldMessenger.of(context).showSnackBar(

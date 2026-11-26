@@ -1219,7 +1219,7 @@ const Map<String, String> zh = {
   'Cœur {0} bpm, visé {1} à {2} : ShiftLink monte les watts.': '心率 {0} bpm，目标 {1} 至 {2}：ShiftLink 提高功率。',
   'Cœur {0} bpm, dans la zone ({1} à {2}).': '心率 {0} bpm，在区间内（{1} 至 {2}）。',
   'Prévenir des nouvelles versions': '新版本提醒',
-  'ShiftLink regarde une fois par jour sur GitHub. Rien d’autre ne part.': 'ShiftLink 每天在 GitHub 上查看一次，不发送其他任何内容。',
+  'ShiftLink regarde sur GitHub à chaque ouverture. Rien d’autre ne part.': 'ShiftLink 每次打开时都会在 GitHub 上查看，不发送其他任何内容。',
   'Chercher une mise à jour': '检查更新',
   'Tu as la dernière version ({0}).': '你已是最新版本（{0}）。',
   'ShiftLink {0} est sortie.': 'ShiftLink {0} 已发布。',

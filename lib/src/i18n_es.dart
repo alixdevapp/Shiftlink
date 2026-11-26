@@ -1501,7 +1501,7 @@ const Map<String, String> es = {
   'Cœur {0} bpm, visé {1} à {2} : ShiftLink monte les watts.': 'Corazón {0} ppm, objetivo {1} a {2}: ShiftLink sube los vatios.',
   'Cœur {0} bpm, dans la zone ({1} à {2}).': 'Corazón {0} ppm, en la zona ({1} a {2}).',
   'Prévenir des nouvelles versions': 'Avisar de nuevas versiones',
-  'ShiftLink regarde une fois par jour sur GitHub. Rien d’autre ne part.': 'ShiftLink mira GitHub una vez al día. No se envía nada más.',
+  'ShiftLink regarde sur GitHub à chaque ouverture. Rien d’autre ne part.': 'ShiftLink mira GitHub cada vez que se abre. No se envía nada más.',
   'Chercher une mise à jour': 'Buscar actualización',
   'Tu as la dernière version ({0}).': 'Tienes la última versión ({0}).',
   'ShiftLink {0} est sortie.': 'Ya salió ShiftLink {0}.',

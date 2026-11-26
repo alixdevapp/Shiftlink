@@ -617,7 +617,7 @@ class AppState extends ChangeNotifier {
 
   /// Nouveautés : à montrer une fois si ShiftLink vient d'être mis à jour (pas à la première installation).
   // ------- Nouvelle version de ShiftLink --------
-  /// Prévenir quand une nouvelle version sort (une requête à GitHub par jour au plus).
+  /// Prévenir quand une nouvelle version sort (une requête à GitHub à chaque ouverture).
   bool get checkUpdates => updateRepo.isNotEmpty && (prefs?.getBool('checkUpdates') ?? true);
   Future<void> setCheckUpdates(bool v) async {
     await prefs?.setBool('checkUpdates', v);
@@ -627,17 +627,10 @@ class AppState extends ChangeNotifier {
   /// Nouvelle version trouvée (et pas encore écartée).
   final ValueNotifier<UpdateInfo?> update = ValueNotifier(null);
 
-  /// Cherche une nouvelle version. Sans [now], au plus une fois par jour et seulement si activé.
+  /// Cherche une nouvelle version : à chaque ouverture de l'appli (si activé), ou tout de suite avec [now].
   Future<UpdateInfo?> checkForUpdate(String current, {bool now = false}) async {
     if (demo || updateRepo.isEmpty || current.isEmpty) return null;
-    if (!now) {
-      if (!checkUpdates) return null;
-      final last = prefs?.getInt('updateCheckedAt') ?? 0;
-      if (DateTime.now().millisecondsSinceEpoch - last < const Duration(hours: 20).inMilliseconds) {
-        return update.value;
-      }
-    }
-    await prefs?.setInt('updateCheckedAt', DateTime.now().millisecondsSinceEpoch);
+    if (!now && !checkUpdates) return null;
     final u = await fetchUpdate(current);
     if (u != null) log('Nouvelle version de ShiftLink : ${u.version}');
     update.value = u == null || (!now && prefs?.getString('skippedVersion') == u.version) ? null : u;

@@ -1477,7 +1477,7 @@ const Map<String, String> en = {
   'Cœur {0} bpm, visé {1} à {2} : ShiftLink monte les watts.': 'Heart {0} bpm, target {1} to {2}: ShiftLink raises the watts.',
   'Cœur {0} bpm, dans la zone ({1} à {2}).': 'Heart {0} bpm, in the zone ({1} to {2}).',
   'Prévenir des nouvelles versions': 'Tell me about new versions',
-  'ShiftLink regarde une fois par jour sur GitHub. Rien d’autre ne part.': 'ShiftLink checks GitHub once a day. Nothing else is sent.',
+  'ShiftLink regarde sur GitHub à chaque ouverture. Rien d’autre ne part.': 'ShiftLink checks GitHub each time it opens. Nothing else is sent.',
   'Chercher une mise à jour': 'Check for an update',
   'Tu as la dernière version ({0}).': 'You have the latest version ({0}).',
   'ShiftLink {0} est sortie.': 'ShiftLink {0} is out.',

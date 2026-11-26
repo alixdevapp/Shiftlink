@@ -338,7 +338,7 @@ class SettingsPage extends StatelessWidget {
                     icon: Icons.system_update_rounded,
                     color: Tones.blue,
                     title: tr('Prévenir des nouvelles versions'),
-                    subtitle: tr('ShiftLink regarde une fois par jour sur GitHub. Rien d’autre ne part.'),
+                    subtitle: tr('ShiftLink regarde sur GitHub à chaque ouverture. Rien d’autre ne part.'),
                     value: app.checkUpdates,
                     onChanged: app.setCheckUpdates,
                   ),
