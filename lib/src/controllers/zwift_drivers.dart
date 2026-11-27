@@ -208,6 +208,21 @@ class ZwiftClickDriver extends _ZwiftController {
   }
 }
 
+/// Sens d'une palette Zwift (Play, Ride) d'après le signe de sa valeur analogique.
+/// Vers l'intérieur (vers le vélo) : positif à gauche, négatif à droite. C'est le signe
+/// que Zwift lit comme un freinage ; pas encore vérifié sur une vraie manette.
+bool zwiftPaddleInward({required bool right, required int value}) => right ? value < 0 : value > 0;
+
+/// Boutons séparés des palettes : ancien identifiant (un seul sens) de chacun.
+const _paddleLegacy = {
+  'paddleIn': 'paddle',
+  'paddleOut': 'paddle',
+  'paddleLeftIn': 'paddleLeft',
+  'paddleLeftOut': 'paddleLeft',
+  'paddleRightIn': 'paddleRight',
+  'paddleRightOut': 'paddleRight',
+};
+
 /// Zwift Play : une poignée = un appareil.
 /// Champs 2 à 5 : les quatre boutons de la face (croix à gauche, Y/Z/A/B à droite),
 /// 6 : bouton latéral, 7 : marche, 8 : palette analogique (sint32, −100 à 100).
@@ -229,7 +244,8 @@ class ZwiftPlayDriver extends _ZwiftController {
   @override
   List<ControllerButton> get buttons => [
     const ControllerButton('side', 'Bouton latéral'),
-    const ControllerButton('paddle', 'Palette'),
+    const ControllerButton('paddleIn', 'Palette vers l’intérieur'),
+    const ControllerButton('paddleOut', 'Palette vers l’extérieur'),
     ...left
         ? const [
             ControllerButton('up', 'Haut'),
@@ -249,8 +265,11 @@ class ZwiftPlayDriver extends _ZwiftController {
   @override
   Map<String, String> get defaultClicks {
     final action = left ? 'shiftDown' : 'shiftUp';
-    return {'side': action, 'paddle': action};
+    return {'side': action, 'paddleIn': action, 'paddleOut': action};
   }
+
+  @override
+  String? legacyButtonOf(String buttonId) => _paddleLegacy[buttonId];
 
   @override
   int get buttonMessage => ZwiftIds.playMsg;
@@ -266,7 +285,8 @@ class ZwiftPlayDriver extends _ZwiftController {
     if (_down(f, 6)) out.add('side');
     if (_down(f, 7)) out.add('power');
     // La palette compte comme appuyée seulement à fond.
-    if (_unzigzag(f[8] ?? 0).abs() >= 100) out.add('paddle');
+    final paddle = _unzigzag(f[8] ?? 0);
+    if (paddle.abs() >= 100) out.add(zwiftPaddleInward(right: !left, value: paddle) ? 'paddleIn' : 'paddleOut');
     return out;
   }
 }
@@ -294,10 +314,12 @@ class ZwiftRideDriver extends _ZwiftController {
   static const _labels = {
     'shiftUpRight': 'Droite : vitesse haut',
     'shiftDownRight': 'Droite : vitesse bas',
-    'paddleRight': 'Palette droite',
+    'paddleRightIn': 'Palette droite vers l’intérieur',
+    'paddleRightOut': 'Palette droite vers l’extérieur',
     'shiftUpLeft': 'Gauche : vitesse haut',
     'shiftDownLeft': 'Gauche : vitesse bas',
-    'paddleLeft': 'Palette gauche',
+    'paddleLeftIn': 'Palette gauche vers l’intérieur',
+    'paddleLeftOut': 'Palette gauche vers l’extérieur',
     'navUp': 'Croix : haut',
     'navDown': 'Croix : bas',
     'navLeft': 'Croix : gauche',
@@ -354,14 +376,19 @@ class ZwiftRideDriver extends _ZwiftController {
   Map<String, String> get defaultClicks => const {
     'shiftUpRight': 'shiftUp',
     'shiftDownRight': 'shiftUp',
-    'paddleRight': 'shiftUp',
+    'paddleRightIn': 'shiftUp',
+    'paddleRightOut': 'shiftUp',
     'shiftUpLeft': 'shiftDown',
     'shiftDownLeft': 'shiftDown',
-    'paddleLeft': 'shiftDown',
+    'paddleLeftIn': 'shiftDown',
+    'paddleLeftOut': 'shiftDown',
   };
 
   @override
   int get buttonMessage => ZwiftIds.rideMsg;
+
+  @override
+  String? legacyButtonOf(String buttonId) => _paddleLegacy[buttonId];
 
   @override
   Set<String> pressedButtons(Uint8List body) {
@@ -371,13 +398,15 @@ class ZwiftRideDriver extends _ZwiftController {
       if (field.number == 1 && field.value != null) mask = field.value!;
       if (field.number == 3 && field.data != null) {
         final p = _pbInts(field.data!);
-        if (_unzigzag(p[2] ?? 0).abs() < paddleThreshold) continue;
-        switch (p[1] ?? 0) {
-          case 0:
-            out.add('paddleLeft');
-          case 1:
-            out.add('paddleRight');
-        }
+        final value = _unzigzag(p[2] ?? 0);
+        if (value.abs() < paddleThreshold) continue;
+        final side = switch (p[1] ?? 0) {
+          0 => 'paddleLeft',
+          1 => 'paddleRight',
+          _ => null,
+        };
+        if (side == null) continue;
+        out.add(zwiftPaddleInward(right: side == 'paddleRight', value: value) ? '${side}In' : '${side}Out');
       }
     }
     for (var bit = 0; bit < _bitOrder.length; bit++) {
@@ -481,9 +510,11 @@ class ZwiftPlayFw2Driver extends ZwiftRideDriver {
   @override
   List<ControllerButton> get buttons => const [
     ControllerButton('shiftUpRight', 'Droite : bouton latéral'),
-    ControllerButton('paddleRight', 'Palette droite'),
+    ControllerButton('paddleRightIn', 'Palette droite vers l’intérieur'),
+    ControllerButton('paddleRightOut', 'Palette droite vers l’extérieur'),
     ControllerButton('shiftUpLeft', 'Gauche : bouton latéral'),
-    ControllerButton('paddleLeft', 'Palette gauche'),
+    ControllerButton('paddleLeftIn', 'Palette gauche vers l’intérieur'),
+    ControllerButton('paddleLeftOut', 'Palette gauche vers l’extérieur'),
     ControllerButton('navUp', 'Croix : haut'),
     ControllerButton('navDown', 'Croix : bas'),
     ControllerButton('navLeft', 'Croix : gauche'),
@@ -499,8 +530,10 @@ class ZwiftPlayFw2Driver extends ZwiftRideDriver {
   @override
   Map<String, String> get defaultClicks => const {
     'shiftUpRight': 'shiftUp',
-    'paddleRight': 'shiftUp',
+    'paddleRightIn': 'shiftUp',
+    'paddleRightOut': 'shiftUp',
     'shiftUpLeft': 'shiftDown',
-    'paddleLeft': 'shiftDown',
+    'paddleLeftIn': 'shiftDown',
+    'paddleLeftOut': 'shiftDown',
   };
 }

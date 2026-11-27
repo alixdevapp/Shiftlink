@@ -13,6 +13,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:nsd/nsd.dart' as nsd;
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../i18n.dart';
 import '../net/lan_server.dart';
@@ -81,6 +82,11 @@ class ObcProtocol {
     'hupser': 'hupser',
     'strappo': 'Strappo',
     'saddleout': 'SaddleOut',
+    'pedalcraft': 'PedalCraft',
+    'suffer': 'suffer.online',
+    'kardiacs': 'Kardiacs',
+    'sueur': 'Sueur',
+    'trainerkit': 'TrainerKit',
   };
 
   /// Champs TXT de l'annonce mDNS (valeurs en texte).
@@ -130,7 +136,9 @@ class ObcServer {
     if (bleStarted.value) return;
     _ble.setMethodCallHandler(_onBle);
     try {
-      bleStarted.value = await _ble.invokeMethod<bool>('start', {'version': '2.22.0'}) ?? false;
+      // Version lue dans l'APK : elle ne reste plus en retard d'une version à l'autre.
+      final version = await PackageInfo.fromPlatform().then((p) => p.version, onError: (_) => '1');
+      bleStarted.value = await _ble.invokeMethod<bool>('start', {'version': version}) ?? false;
       if (!bleStarted.value) log('OpenBikeControl Bluetooth : Bluetooth éteint ou indisponible');
     } catch (e) {
       log('OpenBikeControl Bluetooth : $e');

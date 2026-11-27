@@ -57,6 +57,10 @@ abstract class ControllerDriver {
   /// Action par défaut d'un clic : 'shiftUp', 'shiftDown' ou absent.
   Map<String, String> get defaultClicks;
 
+  /// Ancien identifiant d'un bouton dont les réglages valent encore pour lui, ou null.
+  /// (Les palettes Zwift étaient un seul bouton avant d'être séparées en deux sens.)
+  String? legacyButtonOf(String buttonId) => null;
+
   /// Action par défaut d'un double clic (SRAM AXS).
   Map<String, String> get defaultDoubles => const {};
 

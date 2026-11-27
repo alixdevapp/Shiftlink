@@ -12,7 +12,7 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
-import 'package:flutter/foundation.dart' show ValueNotifier;
+import 'package:flutter/foundation.dart' show ValueNotifier, visibleForTesting;
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -212,13 +212,20 @@ class EliteRizerDriver extends ControllerDriver implements InclineSink {
   /// Code de réponse « commande faite ».
   static const ackDone = 0x02;
 
+  /// Code de réponse « commande non accessible » : le Rizer est verrouillé (LED rouge)
+  /// et refuse toute pente jusqu'à ce qu'on le déverrouille.
+  static const ackLocked = 0x05;
+
   /// Temps laissé au Rizer pour répondre à une commande de pente.
   static const ackTimeout = Duration(seconds: 1);
 
   /// Pente où le Rizer dit être, en % (null = pas encore reçue).
   final ValueNotifier<double?> reportedGrade = ValueNotifier(null);
 
-  /// Dernier refus du Rizer (pour le journal), ou null.
+  /// Le Rizer refuse les pentes parce qu'il est verrouillé (LED rouge).
+  final ValueNotifier<bool> locked = ValueNotifier(false);
+
+  /// Ligne à écrire dans le journal (refus, verrouillage), ou null.
   String? lastRefusal;
 
   Completer<int?>? _ack;
@@ -285,6 +292,7 @@ class EliteRizerDriver extends ControllerDriver implements InclineSink {
     _zero = null;
     _write = null;
     reportedGrade.value = null;
+    locked.value = false;
     _ack?.complete(null);
     _ack = null;
   }
@@ -332,7 +340,28 @@ class EliteRizerDriver extends ControllerDriver implements InclineSink {
     // Sans réponse (ancien firmware), la commande est partie : on la compte comme faite.
     final code = await ack.future.timeout(ackTimeout, onTimeout: () => null);
     if (identical(_ack, ack)) _ack = null;
-    if (code == null || code == ackDone) return true;
+    return handleAck(code, percent);
+  }
+
+  /// Lit la réponse du Rizer à une pente : true si elle est faite (ou sans réponse,
+  /// ancien firmware). Tient à jour [locked] et la ligne de journal [lastRefusal].
+  @visibleForTesting
+  bool handleAck(int? code, double percent) {
+    if (code == null || code == ackDone) {
+      if (code == ackDone && locked.value) {
+        locked.value = false;
+        lastRefusal = 'déverrouillé, la pente suit de nouveau';
+      }
+      return true;
+    }
+    if (code == ackLocked) {
+      // Verrouillé : une seule ligne dans le journal, pas une par seconde.
+      if (!locked.value) {
+        locked.value = true;
+        lastRefusal = 'verrouillé (LED rouge), les pentes sont refusées';
+      }
+      return false;
+    }
     lastRefusal = 'pente ${percent.toStringAsFixed(1)} % refusée (${ackName(code)})';
     return false;
   }

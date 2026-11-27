@@ -341,6 +341,19 @@ class _ControllerCard extends StatelessWidget {
                 ),
               ],
               if (c.driver case final EliteRizerDriver rizer)
+                ValueListenableBuilder<bool>(
+                  valueListenable: rizer.locked,
+                  builder: (_, locked, _) => !locked
+                      ? const SizedBox.shrink()
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 8, right: 8),
+                          child: Text(
+                            tr('Verrouillé (LED rouge) : déverrouille le Rizer pour qu’il suive la pente.'),
+                            style: const TextStyle(fontSize: 13, color: Tones.red, fontWeight: FontWeight.w600, height: 1.3),
+                          ),
+                        ),
+                ),
+              if (c.driver case final EliteRizerDriver rizer)
                 ValueListenableBuilder<double?>(
                   valueListenable: rizer.reportedGrade,
                   builder: (_, g, _) => g == null

@@ -33,11 +33,13 @@ class Keymap {
   ShiftAction? actionFor(ControllerDriver d, String buttonId, Gesture g) {
     if (g == Gesture.long && !d.reportsRelease) return null;
     if (g == Gesture.combo) return null;
-    final custom = _data[buttonKey(d, buttonId)]?[g.name];
+    final legacy = d.legacyButtonOf(buttonId);
+    final custom =
+        _data[buttonKey(d, buttonId)]?[g.name] ?? (legacy == null ? null : _data[buttonKey(d, legacy)]?[g.name]);
     if (custom != null) return ShiftAction.byName(custom);
     return switch (g) {
-      Gesture.click => ShiftAction.byName(d.defaultClicks[buttonId]),
-      Gesture.double => ShiftAction.byName(d.defaultDoubles[buttonId]),
+      Gesture.click => ShiftAction.byName(d.defaultClicks[buttonId] ?? d.defaultClicks[legacy]),
+      Gesture.double => ShiftAction.byName(d.defaultDoubles[buttonId] ?? d.defaultDoubles[legacy]),
       Gesture.long || Gesture.combo => null,
     };
   }

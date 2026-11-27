@@ -7,6 +7,14 @@ import '../net/update_check.dart';
 /// Nouveautés par version, la plus récente en premier.
 List<(String, List<(IconData, String)>)> whatsNew() => [
   (
+    '2.23',
+    [
+      (Icons.sports_esports_rounded, tr('Zwift Play et Zwift Ride : chaque palette a deux boutons, vers l’intérieur et vers l’extérieur, à régler chacun. Tes réglages actuels valent pour les deux.')),
+      (Icons.lock_rounded, tr('Elite Rizer verrouillé (LED rouge) : ShiftLink l’affiche sous le Rizer et ne note plus un refus par seconde dans le journal.')),
+      (Icons.apps_rounded, tr('PedalCraft, suffer.online, Kardiacs, Sueur et TrainerKit sont reconnus par leur nom en OpenBikeControl.')),
+    ],
+  ),
+  (
     '2.22',
     [
       (Icons.system_update_rounded, tr('ShiftLink se met à jour tout seul : quand une nouvelle version sort, touche « Mettre à jour » et Android l’installe en gardant tes réglages.')),
