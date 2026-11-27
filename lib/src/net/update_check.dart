@@ -98,6 +98,15 @@ bool isTrustedApkUrl(String url, {String repo = updateRepo}) {
   return url.toLowerCase().startsWith(prefix) && url.toLowerCase().endsWith('.apk') && !url.contains('..');
 }
 
+/// Supprime l'APK de mise à jour gardé dans le cache (appelé au lancement : une fois
+/// l'appli mise à jour, le fichier ne sert plus et prendrait ~75 Mo).
+Future<void> deleteDownloadedUpdates() async {
+  try {
+    final dir = Directory('${(await getTemporaryDirectory()).path}/updates');
+    if (dir.existsSync()) await dir.delete(recursive: true);
+  } catch (_) {}
+}
+
 /// Résultat d'une mise à jour lancée depuis l'appli.
 enum UpdateResult {
   /// L'installeur d'Android est ouvert.

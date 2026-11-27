@@ -1,9 +1,12 @@
 // Navigation principale : Rouler, Séances, Appareils, Réglages.
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../app_state.dart';
 import '../i18n.dart';
+import '../net/update_check.dart';
 import 'brand.dart';
 import 'devices_page.dart';
 import 'ride_extras.dart' show WorkoutsTab;
@@ -62,6 +65,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
 
   Future<void> _whatsNew() async {
     if (widget.app.demo) return;
+    unawaited(deleteDownloadedUpdates());
     String version;
     try {
       version = (await PackageInfo.fromPlatform()).version;
